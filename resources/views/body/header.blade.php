@@ -332,18 +332,24 @@
                     </li>
                 </ul>
             </div>
+                
+                    
 
-            @php
-                // $id = Auth::user()->id;
-                // $profileData = App\Models\User::find($id);
-            @endphp
-
+                
+                
+                @auth
+                    @php
+                    $id = Auth::user()->id;
+                    $profileData = App\Models\User::find($id)
+                    @endphp;
             <div class="user-box dropdown px-3">
                 <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ url('upload/no_image.jpg') }}" class="user-img" alt="user avatar">
                     <div class="user-info">
-                        <p class="user-name mb-0">Helio Herculano</p>
-                        <p class="designattion mb-0">admin@gmail.com</p>
+                            <p class="user-name mb-0">{{ $profileData->name }}</p>
+                            <p class="designattion mb-0">{{ $profileData->email }}</p>
+                        @else
+                            <a href="{{ route('login') }}" class="btn btn-outline-primary px-5">Entrar</a>
+                        @endauth
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -354,8 +360,16 @@
                     <li>
                         <div class="dropdown-divider mb-0"></div>
                     </li>
-                    <li><a class="dropdown-item d-flex align-items-center" href="/"><i class="bx bx-log-out-circle"></i><span>Logout</span></a>
-                    </li>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf <!-- Adicione o token CSRF -->
+</form>
+
+<li>
+    <a class="dropdown-item d-flex align-items-center" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <i class="bx bx-log-out-circle"></i>
+        <span>Sair</span>
+    </a>
+</li>
                 </ul>
             </div>
         </nav>
