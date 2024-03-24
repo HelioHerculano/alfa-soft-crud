@@ -71,6 +71,7 @@
         new PerfectScrollbar(".app-container")
     </script>
     <script type="text/javascript" src="{{ asset('assets/js/toastr.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/sweetalert2@10.js') }}"></script>
 
     <script>
     @if(Session::has('message'))
@@ -93,6 +94,41 @@
         break;
     }
     @endif
+    </script>
+
+    <script>
+        $(function(){
+            $(document).on('click','#delete',function(e){
+                e.preventDefault();
+                var id = $(this).attr("data-id")
+
+                var url = "{{ route('contact.destroy', ':id') }}";
+                url = url.replace(':id', id);
+
+                        Swal.fire({
+                            title: 'Tem a certeza?',
+                            text: "Remover esse contacto?",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Sim, tenho!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                            window.location.href = url;
+                            // Swal.fire(
+                            //     'Deleted!',
+                            //     'Your file has been deleted.',
+                            //     'success'
+                            // )
+                            }
+                        }) 
+
+
+            });
+
+        });
+
     </script>
 
 </body>

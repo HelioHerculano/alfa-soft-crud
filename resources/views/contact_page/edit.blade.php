@@ -8,6 +8,7 @@
     <div class="card-body p-4">
         <form method="POST" action="{{ route('contact.update',$contact->id) }}">
         @csrf
+        {{method_field('PUT')}}    
         <h5 class="mb-4">Editar contacto</h5>
             <div class="row mb-3">
                 <label for="input42" class="col-sm-3 col-form-label">Informe o nome</label>

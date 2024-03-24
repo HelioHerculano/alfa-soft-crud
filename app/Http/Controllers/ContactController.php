@@ -52,7 +52,9 @@ class ContactController extends Controller
             'alert-type' => "success"
         ];
 
-        return back()->with($notification);
+        // return back()->with($notification);
+        return redirect()->route('index')->with($notification);
+
     }
 
     /**
@@ -98,7 +100,9 @@ class ContactController extends Controller
             'alert-type' => "success"
         ];
 
-        return back()->with($notification);
+        // return back()->with($notification);
+
+        return redirect()->route('index')->with($notification);
     }
 
     /**
@@ -106,6 +110,15 @@ class ContactController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $contact = Contact::find($id);
+        
+        $contact->delete();
+
+        $notification = [
+            "message" => "Contacto removido com sucesso",
+            'alert-type' => "success"
+        ];
+
+        return back()->with($notification);
     }
 }

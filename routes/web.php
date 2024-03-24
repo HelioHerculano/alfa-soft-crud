@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,10 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ContactController::class,'index'])->name('index');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/create/contact', [ContactController::class,'create'])->name('create.contact');
-Route::post('/store/contact', [ContactController::class,'store'])->name('contact.store');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/edit/{id}/contact', [ContactController::class,'edit'])->name('edit.contact');
-Route::post('/update/{id}/contact', [ContactController::class,'update'])->name('contact.update');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

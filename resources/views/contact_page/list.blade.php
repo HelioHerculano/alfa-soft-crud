@@ -45,7 +45,7 @@
                                 <td>{{ $contact->email }}</td>
                                 <td style="width: 100px;">
                                     <a href="{{route('edit.contact',$contact->id)}}" class="btn btn-info px-5 btn-sm"><i class="fadeIn animated bx bx-pencil text-white"></i></a>
-                                    <button type="button" class="btn btn-danger px-5  btn-sm"><i class="fadeIn animated bx bx-trash-alt"></i></button>
+                                    <butaton type="button" id="delete" class="btn btn-danger px-5  btn-sm" data-id="{{$contact->id}}" ><i class="fadeIn animated bx bx-trash-alt"></i></butaton>
                                 </td>
                             </tr>
                         @endforeach

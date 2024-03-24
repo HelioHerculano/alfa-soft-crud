@@ -19,6 +19,24 @@
                 <div class="menu-title">Lista de conatctos</div>
             </a>
         </li>
+
+        {{-- <li>
+            <a href="{{ route('index') }}">
+                <div class="parent-icon"><i class='bx bx-support'></i>
+                </div>
+                <div class="menu-title">Registar conatcto</div>
+            </a>
+        </li> --}}
+
+        
+                <li>
+            <a href="{{ route('create.contact') }}">
+                <div class="parent-icon"><i class="fadeIn animated bx bx-pencil text-white"></i>
+                </div>
+                <div class="menu-title">Registar conatcto</div>
+            </a>
+        </li>
+        
 {{-- 
                 <li>
             <a href="https://themeforest.net/user/codervent" target="_blank">
@@ -26,7 +44,7 @@
                 </div>
                 <div class="menu-title">Support</div>
             </a> --}}
-        </li>
+        {{-- </li> --}}
     </ul>
     <!--end navigation-->
 </div>
