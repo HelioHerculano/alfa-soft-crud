@@ -22,7 +22,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('contact_page.create');
     }
 
     /**
@@ -30,7 +30,29 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $messagePT = [
+            'required' => "O campo é obrigatorio"
+        ];
+        $request->validate([
+            'name' =>'required|min:6',
+            'contact' =>'required|numeric|digits:9|unique:contacts,contact',
+            'email' =>'required|email|unique:contacts,email',
+        ],$messagePT);
+
+        Contact::create([
+            'name' => $request->name,
+            'contact' => $request->contact,
+            'email' => $request->email,
+        ]);
+
+        
+        $notification = [
+            "message" => "Contacto registado com sucesso",
+            'alert-type' => "success"
+        ];
+
+        return back()->with($notification);
     }
 
     /**
@@ -44,9 +66,10 @@ class ContactController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $contact = Contact::find($id);
+        return view('contact_page.edit',compact('contact'));
     }
 
     /**
@@ -54,7 +77,28 @@ class ContactController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $messagePT = [
+            'required' => "O campo é obrigatorio"
+        ];
+        $request->validate([
+            'name' =>'required|min:6',
+            'contact' =>'required|numeric|digits:9',
+            'email' =>'required|email',
+        ],$messagePT);
+
+        Contact::whereId($id)->update([
+           "name" => $request->name,
+           "contact" => $request->contact,
+           "email" => $request->email,
+        ]);
+
+        $notification = [
+            "message" => "Dados do contacto actualizados com sucesso",
+            'alert-type' => "success"
+        ];
+
+        return back()->with($notification);
     }
 
     /**
