@@ -37,15 +37,18 @@
                         <th>Action</th>
                         </tr>
                         </thead>
-                        <tbody><tr>
-                        <td>Iphone 5</td>
-                        <td>872045773</td>
-                            <td>admin@gmail.com</td>
-                            <td style="width: 100px;">
-                                <button type="button" class="btn btn-info px-5 btn-sm"><i class="fadeIn animated bx bx-pencil text-white"></i></button>
-                                <button type="button" class="btn btn-danger px-5  btn-sm"><i class="fadeIn animated bx bx-trash-alt"></i></button>
-                            </td>
-                        </tr>
+                        <tbody>
+                        @foreach($contacts as $contact)
+                        <tr>
+                            <td>{{ $contact->name }}</td>
+                            <td>{{ $contact->contact }}</td>
+                                <td>{{ $contact->email }}</td>
+                                <td style="width: 100px;">
+                                    <button type="button" class="btn btn-info px-5 btn-sm"><i class="fadeIn animated bx bx-pencil text-white"></i></button>
+                                    <button type="button" class="btn btn-danger px-5  btn-sm"><i class="fadeIn animated bx bx-trash-alt"></i></button>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                     </table>
                     </div>

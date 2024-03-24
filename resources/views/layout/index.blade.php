@@ -1,1 +1,1 @@
-@include('contact_page.list')
+@include('contact_page.list',['contacts' => $contacts])
